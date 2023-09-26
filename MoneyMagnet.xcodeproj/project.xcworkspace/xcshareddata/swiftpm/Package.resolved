@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "popupview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/exyte/PopupView.git",
+      "state" : {
+        "revision" : "7cfd26db6cc8a4aedb1a80a5df669019a417bfd2",
+        "version" : "2.7.0"
+      }
+    },
+    {
+      "identity" : "swiftui-custom-textfield",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/esatgozcu/SwiftUI-Custom-TextField",
+      "state" : {
+        "branch" : "main",
+        "revision" : "39ab56a35a19fe87749769df32f929ec62bcbc6f"
+      }
+    }
+  ],
+  "version" : 2
+}
