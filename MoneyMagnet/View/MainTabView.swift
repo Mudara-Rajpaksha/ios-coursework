@@ -9,9 +9,10 @@ import SwiftUI
 import PopupView
 
 struct MainTabView: View {
+    @ObservedObject var homeVM = HomeViewModel()
+    @ObservedObject var transferVM = TransfersViewModel()
     @State var selectedTab = "ic_home"
     @State var selectedImage = ""
-    @State var showingCredits = false
     
     var body: some View {
         NavigationStack{
@@ -19,20 +20,17 @@ struct MainTabView: View {
                 switch selectedTab {
                 case "ic_user":
                     ProfileView()
-    //                    .environmentObject(PagesVM)
                         .ignoresSafeArea(.container, edges: .bottom)
                         .statusBar(hidden: false)
                 case "ic_wallet":
                     TransfersView()
-    //                    .environmentObject(PagesVM)
+                        .environmentObject(transferVM)
                         .ignoresSafeArea(.container, edges: .bottom)
                         .statusBar(hidden: false)
                 default:
                     HomeView()
-    //                    .environmentObject(AdvertisementsVM)
-    //                    .environmentObject(CategoriesVM)
-    //                    .environmentObject(PagesVM)
-                        .ignoresSafeArea()
+                        .environmentObject(homeVM)
+                        .ignoresSafeArea(.container, edges: .bottom)
                         .statusBar(hidden: true)
                 }
                 CustomTabBar(selectedTab: $selectedTab, selectedImage: $selectedImage)
@@ -41,14 +39,52 @@ struct MainTabView: View {
                     .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 15 : 0)
             })
             .ignoresSafeArea(.keyboard, edges: .bottom)
-            .popup(isPresented: $showingCredits) {
-                HStack{
-                    Spacer()
-                    Text("This app was brought to you by Hacking with Swift")
-                    Spacer()
-                }
+            .popup(isPresented: self.$transferVM.showFilterTime) {
+                TransitionFilterView(filter: self.$transferVM.filterTime, showFilterTime: self.$transferVM.showFilterTime, filterTypes: self.transferVM.filterTypes)
                 .frame(minHeight: 150)
-                .background(.red)
+                .background(.white)
+            } customize: {
+                $0
+                    .type(.default)
+                    .position(.bottom)
+                    .animation(.spring())
+                    .closeOnTapOutside(true)
+                    .backgroundColor(.black.opacity(0.5))
+            }
+            .popup(isPresented: self.$homeVM.showReportSelect) {
+                VStack{
+                    Button(action: {
+                        homeVM.reportType = false
+                        homeVM.showReportSelect.toggle()
+                        homeVM.jumpToReport.toggle()
+                    }, label: {
+                        Spacer()
+                        Text("Income")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Color.white)
+                        Spacer()
+                    })
+                    .padding(.all)
+                    .background(.green)
+                    .cornerRadius(10)
+                    Button(action: {
+                        homeVM.reportType = true
+                        homeVM.showReportSelect.toggle()
+                        homeVM.jumpToReport.toggle()
+                    }, label: {
+                        Spacer()
+                        Text("Expense")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Color.white)
+                        Spacer()
+                    })
+                    .padding(.all)
+                    .background(.red)
+                    .cornerRadius(10)
+                }
+                .padding(.top, 15)
+                .padding([.horizontal, .bottom], 25)
+                .background(.white)
             } customize: {
                 $0
                     .type(.default)
@@ -67,7 +103,6 @@ struct MainTabView_Previews: PreviewProvider {
     }
 }
 
-
 struct CustomTabBar: View {
     @Binding var selectedTab: String
     @Binding var selectedImage: String
@@ -80,15 +115,7 @@ struct CustomTabBar: View {
             TabBarButton(image: "ic_user", selectedTab: $selectedTab, selectedImage: $selectedImage, tabPoints: $tabPoints)
         }
         .padding()
-        .background(.gray)
-        .clipShape(CustomShape(tabPoint: getCurvepoints() - 17))
-        .overlay(
-            Circle()
-                .fill(Color("ThemeColor").opacity(0.5))
-                .frame(width: 10, height: 10)
-                .offset(x: getCurvepoints() - 22)
-            ,alignment:  .bottomLeading
-        )
+        .background(.gray.opacity(0.4))
         .cornerRadius(20)
         .padding(.horizontal)
     }
@@ -138,44 +165,10 @@ struct TabBarButton: View {
                         .aspectRatio(contentMode: .fit)
                         .opacity(0.6)
                         .frame(height: selectedTab == image ? 45 : 30)
-                        .offset(y: selectedTab == image ? -5 : 0)
                 })
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             )
         }
         .frame(height: 45)
-    }
-}
-
-struct CustomShape: Shape{
-    var tabPoint: CGFloat
-
-    var animatableData: CGFloat{
-        get {return tabPoint}
-        set {tabPoint = newValue}
-    }
-
-    func path(in rect: CGRect) -> Path {
-        return Path{path in
-            path.move(to: CGPoint(x: rect.width, y: rect.height))
-            path.addLine(to: CGPoint(x: rect.width, y: 0))
-            path.addLine(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: 0, y: rect.height))
-
-            let mid = tabPoint
-
-            path.move(to: CGPoint(x: mid - 40, y: rect.height))
-
-            let to = CGPoint(x: mid, y: rect.height - 20)
-            let control1 = CGPoint(x: mid - 15, y: rect.height)
-            let control2 = CGPoint(x: mid - 15, y: rect.height - 20)
-
-            let to1 = CGPoint(x: mid + 40, y: rect.height)
-            let control3 = CGPoint(x: mid + 15, y: rect.height - 20)
-            let control4 = CGPoint(x: mid + 15, y: rect.height)
-
-            path.addCurve(to: to, control1: control1, control2: control2)
-            path.addCurve(to: to1, control1: control3, control2: control4)
-        }
     }
 }
