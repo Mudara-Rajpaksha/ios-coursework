@@ -14,6 +14,7 @@ struct ReportTransferView: View {
     @State var showCategories: Bool = false
     @Binding var reportType: Bool
     @ObservedObject var reportCatrgoryVM = ReportCategoryViewModel()
+    @ObservedObject var reportTransferVM = ReportTransferViewModel()
     @State var isPickerPresented: Bool = false
     @State private var selectedImage: UIImage? = nil
     
@@ -102,6 +103,13 @@ struct ReportTransferView: View {
                     })
                 }
                 Button(action: {
+                    if selectedImage != nil{
+                        reportTransferVM.uploadToStorage(selectedImage: selectedImage!)
+                    } else {
+                        withAnimation{
+                            reportTransferVM.isError.toggle()
+                        }
+                    }
                 }, label: {
                     Spacer()
                     Text("Submit")
@@ -123,6 +131,31 @@ struct ReportTransferView: View {
         .navigationTitle(reportType ? "Expence" : "Income")
         .sheet(isPresented: $isPickerPresented) {
             ImagePickerUtils(selectedImage: $selectedImage)
+        }
+        .popup(isPresented: $reportTransferVM.isError) {
+            HStack {
+                Spacer()
+                Image("ic_warn")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .padding(.trailing, 5)
+                Text("Please select a Image!")
+                    .font(.system(size: 18, weight: .regular))
+                Spacer()
+            }
+            .padding(.vertical, 10)
+            .background(Color("WarnYellow"))
+            .cornerRadius(15)
+            .padding(.horizontal, 25)
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.bottom)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.5))
+                .autohideIn(2)
         }
         NavigationLink(destination:
                         ReportCategoryView(reportType: $reportType)
