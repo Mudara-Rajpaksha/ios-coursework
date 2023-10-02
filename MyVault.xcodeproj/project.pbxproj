@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		304A16FF2AC7D4C300D8B2F9 /* ImageUploadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304A16FE2AC7D4C300D8B2F9 /* ImageUploadUtils.swift */; };
 		304A17012AC7D4E100D8B2F9 /* ReportTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304A17002AC7D4E100D8B2F9 /* ReportTransferViewModel.swift */; };
-		304A17032AC7D50300D8B2F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 304A17022AC7D50300D8B2F9 /* GoogleService-Info.plist */; };
 		304A17062AC7D52800D8B2F9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 304A17052AC7D52800D8B2F9 /* FirebaseAnalytics */; };
 		304A17082AC7D52800D8B2F9 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 304A17072AC7D52800D8B2F9 /* FirebaseAnalyticsOnDeviceConversion */; };
 		304A170A2AC7D52800D8B2F9 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 304A17092AC7D52800D8B2F9 /* FirebaseAnalyticsSwift */; };
@@ -17,6 +16,7 @@
 		304A170E2AC7D52800D8B2F9 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 304A170D2AC7D52800D8B2F9 /* FirebaseAppCheck */; };
 		307651162AC7D6C700C2F8B6 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 307651152AC7D6C700C2F8B6 /* YPImagePicker */; };
 		307651182AC7D6E600C2F8B6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 307651172AC7D6E600C2F8B6 /* Kingfisher */; };
+		309AAF4E2ACB424500F55A64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 309AAF4D2ACB424500F55A64 /* GoogleService-Info.plist */; };
 		30AB07C32AC7788200B5CA84 /* ImagePickerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB07C22AC7788200B5CA84 /* ImagePickerUtils.swift */; };
 		30AB07C62AC778B600B5CA84 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 30AB07C52AC778B600B5CA84 /* Kingfisher */; };
 		30AB07C92AC7790200B5CA84 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 30AB07C82AC7790200B5CA84 /* YPImagePicker */; };
@@ -61,7 +61,7 @@
 /* Begin PBXFileReference section */
 		304A16FE2AC7D4C300D8B2F9 /* ImageUploadUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadUtils.swift; sourceTree = "<group>"; };
 		304A17002AC7D4E100D8B2F9 /* ReportTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTransferViewModel.swift; sourceTree = "<group>"; };
-		304A17022AC7D50300D8B2F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		309AAF4D2ACB424500F55A64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		30AB07C22AC7788200B5CA84 /* ImagePickerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerUtils.swift; sourceTree = "<group>"; };
 		30AB07CA2AC77A2200B5CA84 /* TransferDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailsView.swift; sourceTree = "<group>"; };
 		30AB07CC2AC77A4000B5CA84 /* ReportTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTransferView.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		30C30CA92ACB3D9B0008EA28 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		30C30CAB2ACB3EE00008EA28 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		30C30CAD2ACB3EEE0008EA28 /* TransDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransDetailsViewModel.swift; sourceTree = "<group>"; };
-		8D56AD9E2ABF13E200F69464 /* MoneyMagnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyMagnet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D56AD9E2ABF13E200F69464 /* MyVault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyVault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D56ADA12ABF13E200F69464 /* MoneyMagnetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyMagnetApp.swift; sourceTree = "<group>"; };
 		8D56ADA32ABF13E200F69464 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		8D56ADA82ABF13E500F69464 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		8D56AD952ABF13E200F69464 = {
 			isa = PBXGroup;
 			children = (
-				8D56ADA02ABF13E200F69464 /* MoneyMagnet */,
+				8D56ADA02ABF13E200F69464 /* MyVault */,
 				8D56AD9F2ABF13E200F69464 /* Products */,
 				30C30C5C2AC7D85E0008EA28 /* Frameworks */,
 			);
@@ -141,12 +141,12 @@
 		8D56AD9F2ABF13E200F69464 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D56AD9E2ABF13E200F69464 /* MoneyMagnet.app */,
+				8D56AD9E2ABF13E200F69464 /* MyVault.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8D56ADA02ABF13E200F69464 /* MoneyMagnet */ = {
+		8D56ADA02ABF13E200F69464 /* MyVault */ = {
 			isa = PBXGroup;
 			children = (
 				8D56ADB62ABF295D00F69464 /* Utils */,
@@ -157,7 +157,7 @@
 				8D56ADA12ABF13E200F69464 /* MoneyMagnetApp.swift */,
 				8D56ADA72ABF13E500F69464 /* Preview Content */,
 			);
-			path = MoneyMagnet;
+			path = MyVault;
 			sourceTree = "<group>";
 		};
 		8D56ADA72ABF13E500F69464 /* Preview Content */ = {
@@ -217,8 +217,8 @@
 		8D56ADB42ABF294800F69464 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				309AAF4D2ACB424500F55A64 /* GoogleService-Info.plist */,
 				30C30CA12ACB3C930008EA28 /* Assets.xcassets */,
-				304A17022AC7D50300D8B2F9 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -239,9 +239,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D56AD9D2ABF13E200F69464 /* MoneyMagnet */ = {
+		8D56AD9D2ABF13E200F69464 /* MyVault */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D56ADAC2ABF13E500F69464 /* Build configuration list for PBXNativeTarget "MoneyMagnet" */;
+			buildConfigurationList = 8D56ADAC2ABF13E500F69464 /* Build configuration list for PBXNativeTarget "MyVault" */;
 			buildPhases = (
 				8D56AD9A2ABF13E200F69464 /* Sources */,
 				8D56AD9B2ABF13E200F69464 /* Frameworks */,
@@ -251,7 +251,7 @@
 			);
 			dependencies = (
 			);
-			name = MoneyMagnet;
+			name = MyVault;
 			packageProductDependencies = (
 				8DED625E2ABFFED50047F296 /* CustomTextField */,
 				8DED626F2AC12FA80047F296 /* PopupView */,
@@ -269,7 +269,7 @@
 				30C30CB02ACB3F650008EA28 /* MarqueeText */,
 			);
 			productName = MoneyMagnet;
-			productReference = 8D56AD9E2ABF13E200F69464 /* MoneyMagnet.app */;
+			productReference = 8D56AD9E2ABF13E200F69464 /* MyVault.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -308,7 +308,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D56AD9D2ABF13E200F69464 /* MoneyMagnet */,
+				8D56AD9D2ABF13E200F69464 /* MyVault */,
 			);
 		};
 /* End PBXProject section */
@@ -319,7 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D56ADB02ABF222000F69464 /* Launch Screen.storyboard in Resources */,
-				304A17032AC7D50300D8B2F9 /* GoogleService-Info.plist in Resources */,
+				309AAF4E2ACB424500F55A64 /* GoogleService-Info.plist in Resources */,
 				30C30CA22ACB3C930008EA28 /* Assets.xcassets in Resources */,
 				8D56ADA92ABF13E500F69464 /* Preview Assets.xcassets in Resources */,
 			);
@@ -490,7 +490,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MoneyMagnet/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MyVault/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Access your camera to take and share photos within the app.";
@@ -499,13 +499,15 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.MoneyMagnet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MyVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -523,7 +525,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MoneyMagnet/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MyVault/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Access your camera to take and share photos within the app.";
@@ -532,13 +534,15 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.MoneyMagnet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MyVault;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -561,7 +565,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D56ADAC2ABF13E500F69464 /* Build configuration list for PBXNativeTarget "MoneyMagnet" */ = {
+		8D56ADAC2ABF13E500F69464 /* Build configuration list for PBXNativeTarget "MyVault" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D56ADAD2ABF13E500F69464 /* Debug */,
