@@ -18,10 +18,11 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     private let baseURL = "https://ios-backend-5zdx.onrender.com/"
+//    private let baseURL = "http://127.0.0.1:8080/"
     
     private init() {}
     
-    func request<T: Decodable>(_ path: String, method: HTTPMethod, query: [String: Any]? = nil, body: [String: Any]? = nil, response: T.Type) -> AnyPublisher<T, Error> {
+    func request<T: Decodable>(_ path: String, method: HTTPMethod, query: [String: Any]? = nil, body: [String: Any]? = nil, headers: [String: Any]? = nil, response: T.Type) -> AnyPublisher<T, Error> {
             var urlString = "\(baseURL)\(path)"
             
             if let queryParameters = query {
@@ -43,6 +44,12 @@ class NetworkManager {
                 urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
             }
             
+            if let headers = headers {
+                for (key, value) in headers {
+                    urlRequest.setValue(value as! String, forHTTPHeaderField: key)
+                }
+            }
+        
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
             

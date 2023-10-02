@@ -14,6 +14,11 @@ struct UserModel: Codable {
 }
 
 struct UserData: Codable {
+    let user: User
+    let accessToken: String
+}
+
+struct User: Codable {
     let userID, username, email, password: String
     let id: String
     let v: Int

@@ -6,22 +6,30 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct TransfersView: View {
     @EnvironmentObject var transferVM: TransfersViewModel
-    @State var showingCredits = true
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20){
             HStack{
-                HStack{
-                    Image(systemName: "chevron.down")
-                    Text("Expences")
-                }
-                .padding(10)
-                .overlay(
-                    Capsule(style: .continuous)
-                        .stroke(.gray, lineWidth: 1)
-                )
+                Button(action: {
+                    transferVM.showFilterType.toggle()
+                }, label: {
+                    HStack{
+                        Image(systemName: "chevron.down")
+                            .foregroundColor(.black)
+                        Text(transferVM.filterType == 0 ? "All" : transferVM.filterType == 1 ? "Income" : "Expense")
+                            .foregroundColor(.black)
+                    }
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 15)
+                    .overlay(
+                        Capsule(style: .continuous)
+                            .stroke(.gray, lineWidth: 1)
+                    )
+                })
                 Spacer()
                 Button(action: {
                     withAnimation{
@@ -47,81 +55,96 @@ struct TransfersView: View {
             .padding(15)
             .background(.yellow.opacity(0.3))
             .cornerRadius(10)
-            Text("Today")
+            Text(transferVM.filterTypes[transferVM.filterTime])
                 .font(.system(size: 18, weight: .bold))
-            VStack{
-                HStack{
-                    Image("ic_cart")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 35)
-                        .padding(10)
-                        .background(.yellow.opacity(0.3))
-                        .cornerRadius(10)
-                    VStack(spacing: 8){
+            ScrollView(.vertical, showsIndicators: false, content: {
+                VStack{
+                    if (transferVM.isLoading) {
                         HStack{
-                            Text("Shopping")
-                                .font(.system(size: 18, weight: .semibold))
                             Spacer()
-                            Text("- $120")
-                                .foregroundColor(.red)
-                                .font(.system(size: 18, weight: .semibold))
+                            ProgressView()
+                                .padding(.all)
+                            Spacer()
                         }
-                        HStack{
-                            Text("Buy some groceras")
-                                .font(.system(size: 14))
-                                .foregroundColor(.gray)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                            Spacer()
-                            Text("01-08-2023")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 11))
+                    } else {
+                        if (transferVM.transferListResponse.transactionList.isEmpty){
+                            VStack {
+                                Spacer()
+                                HStack(spacing: 10){
+                                    Spacer()
+                                    Image("ic_empty")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 35)
+                                    Text("No Transactions Yet.")
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                        } else {
+                            ForEach(0..<transferVM.transferListResponse.transactionList.count, id: \.self){ index in
+                                NavigationLink(destination: TransferDetailsView(item: transferVM.transferListResponse.transactionList[index]), label: {
+                                    HStack{
+                                        if (transferVM.transferListResponse.transactionList[index].transactionType == 1) {
+                                            Image(CommonUtils.getIncomeIcon(input: transferVM.transferListResponse.transactionList[index].transactionCategory))
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 35)
+                                                .padding(10)
+                                                .background(.yellow.opacity(0.3))
+                                                .cornerRadius(10)
+                                        } else {
+                                            Image(CommonUtils.getExpenseIcon(input: transferVM.transferListResponse.transactionList[index].transactionCategory))
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 35)
+                                                .padding(10)
+                                                .background(.yellow.opacity(0.3))
+                                                .cornerRadius(10)
+                                        }
+                                        VStack(spacing: 8){
+                                            HStack{
+                                                if (transferVM.transferListResponse.transactionList[index].transactionType == 1) {
+                                                    Text(CommonUtils.getIncomeTransferCategory(input: transferVM.transferListResponse.transactionList[index].transactionCategory))
+                                                        .font(.system(size: 18, weight: .semibold))
+                                                } else {
+                                                    Text(CommonUtils.getExpenseTransferCategory(input: transferVM.transferListResponse.transactionList[index].transactionCategory))
+                                                        .font(.system(size: 18, weight: .semibold))
+                                                }
+                                                Spacer()
+                                                Text(String(format: "%@ $%.2f", transferVM.transferListResponse.transactionList[index].transactionType == 1 ? "+" : "-", transferVM.transferListResponse.transactionList[index].transactionAmount))
+                                                    .foregroundColor(transferVM.transferListResponse.transactionList[index].transactionType == 1 ? .green : .red)
+                                                    .font(.system(size: 18, weight: .semibold))
+                                            }
+                                            HStack{
+                                                Text("\(transferVM.transferListResponse.transactionList[index].transactionRemark)")
+                                                    .font(.system(size: 14))
+                                                    .foregroundColor(.gray)
+                                                    .lineLimit(1)
+                                                    .truncationMode(.tail)
+                                                Spacer()
+                                                Text(CommonUtils.formatTimestamp(TimeInterval(transferVM.transferListResponse.transactionList[index].transactionDate)))
+                                                    .foregroundColor(.gray)
+                                                    .font(.system(size: 11))
+                                            }
+                                        }
+                                    }
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 15)
+                                    .background(.gray.opacity(0.1))
+                                    .cornerRadius(10)
+                                })
+                            }
                         }
                     }
                 }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 15)
-                .background(.gray.opacity(0.1))
-                .cornerRadius(10)
-                HStack{
-                    Image("ic_salary")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 35)
-                        .padding(10)
-                        .background(.green.opacity(0.3))
-                        .cornerRadius(10)
-                    VStack(spacing: 8){
-                        HStack{
-                            Text("Salary")
-                                .font(.system(size: 18, weight: .semibold))
-                            Spacer()
-                            Text("+ $560")
-                                .foregroundColor(.green)
-                                .font(.system(size: 18, weight: .semibold))
-                        }
-                        HStack{
-                            Text("Salary of August")
-                                .font(.system(size: 14))
-                                .foregroundColor(.gray)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                            Spacer()
-                            Text("01-08-2023")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 11))
-                        }
-                    }
-                }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 15)
-                .background(.gray.opacity(0.1))
-                .cornerRadius(10)
-            }
+            })
             Spacer()
         }
         .padding(.horizontal, 25)
+        .onAppear{
+            self.transferVM.getUserTransactions()
+        }
     }
 }
 
@@ -132,18 +155,12 @@ struct TransfersView_Previews: PreviewProvider {
 }
 
 struct TransitionFilterView: View {
-    @Binding var filter: Int
-    @Binding var showFilterTime: Bool
-    @State var filterTypes: [String]
+    @EnvironmentObject var transferVM: TransfersViewModel
     @State var selectedIndex = 0
     
-    init(filter: Binding<Int>, showFilterTime: Binding<Bool>, filterTypes: [String]) {
-            _filter = filter
-            _showFilterTime = showFilterTime
-            _filterTypes = State(initialValue: filterTypes)
-            _selectedIndex = State(initialValue: filter.wrappedValue)
-        }
-    
+    init(filter: Binding<Int>) {
+        _selectedIndex = State(initialValue: filter.wrappedValue)
+    }
     var body: some View {
         VStack(alignment: .leading){
             HStack{
@@ -168,9 +185,9 @@ struct TransitionFilterView: View {
             Text("Filter By")
                 .font(.system(size: 18, weight: .semibold))
             HStack{
-                ForEach(0..<filterTypes.count, id: \.self){ index in
+                ForEach(0..<transferVM.filterTypes.count, id: \.self){ index in
                     if selectedIndex == index {
-                        Text(filterTypes[index])
+                        Text(transferVM.filterTypes[index])
                             .padding(.vertical, 10)
                             .padding(.horizontal, 20)
                             .background(
@@ -183,7 +200,7 @@ struct TransitionFilterView: View {
                                 }
                             }
                     } else {
-                        Text(filterTypes[index])
+                        Text(transferVM.filterTypes[index])
                             .padding(.vertical, 10)
                             .padding(.horizontal, 20)
                             .overlay(
@@ -199,8 +216,9 @@ struct TransitionFilterView: View {
                }
             }
             Button(action: {
-                filter = selectedIndex
-                showFilterTime.toggle()
+                transferVM.filterTime = selectedIndex
+                transferVM.showFilterTime.toggle()
+                self.transferVM.getUserTransactions()
             }, label: {
                 Spacer()
                 Text("Apply")
@@ -215,5 +233,59 @@ struct TransitionFilterView: View {
         }
         .padding([.horizontal, .bottom], 25)
         .padding(.top, 10)
+    }
+}
+
+struct TransitionTypesView: View {
+    @EnvironmentObject var transferVM: TransfersViewModel
+    
+    var body: some View {
+        VStack{
+            Button(action: {
+                transferVM.filterType = 0
+                transferVM.showFilterType.toggle()
+                transferVM.getUserTransactions()
+            }, label: {
+                Spacer()
+                Text("All")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color.white)
+                Spacer()
+            })
+            .padding(.all)
+            .background(.gray)
+            .cornerRadius(10)
+            Button(action: {
+                transferVM.filterType = 1
+                transferVM.showFilterType.toggle()
+                transferVM.getUserTransactions()
+            }, label: {
+                Spacer()
+                Text("Income")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color.white)
+                Spacer()
+            })
+            .padding(.all)
+            .background(.green)
+            .cornerRadius(10)
+            Button(action: {
+                transferVM.filterType = 2
+                transferVM.showFilterType.toggle()
+                transferVM.getUserTransactions()
+            }, label: {
+                Spacer()
+                Text("Expense")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color.white)
+                Spacer()
+            })
+            .padding(.all)
+            .background(.red)
+            .cornerRadius(10)
+        }
+        .padding(.top, 15)
+        .padding([.horizontal, .bottom], 25)
+        .background(.white)
     }
 }

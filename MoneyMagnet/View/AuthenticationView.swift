@@ -11,6 +11,8 @@ import PopupView
 
 struct AuthenticationView: View {
     @ObservedObject var authVM = AuthenticationViewModel()
+    private let isPinSet = UserDefaultsManager.shared.getBool(forKey: UserDefaultsManager.IS_PIN_SETTED)
+    
     var body: some View {
         NavigationStack{
             if authVM.isToggledLog {
@@ -22,18 +24,23 @@ struct AuthenticationView: View {
                         .setPlaceHolderText("Password")
                         .setSecureText(true)
                         .setTextFieldHeight(55)
-                    Button(action: {
-                        UserDefaultsManager.shared.setBool(true, forKey: UserDefaultsManager.IS_LOGGEDIN)
-                    }, label: {
-                        Spacer()
-                        Text("Login")
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(Color.white)
-                        Spacer()
-                    })
-                    .padding(.all)
-                    .background(Color("ThemeColor"))
-                    .cornerRadius(10)
+                    if !authVM.isLoading {
+                        Button(action: {
+                            authVM.loginUser()
+                        }, label: {
+                            Spacer()
+                            Text("Login")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Color.white)
+                            Spacer()
+                        })
+                        .padding(.all)
+                        .background(Color("ThemeColor"))
+                        .cornerRadius(10)
+                    } else {
+                        ProgressView()
+                            .padding(.all)
+                    }
                     HStack(spacing: 5){
                         Spacer()
                         Text("Don’t have an account yet?")
@@ -56,6 +63,31 @@ struct AuthenticationView: View {
                 .padding(.top, 20)
                 .padding(.horizontal, 20)
                 .navigationBarTitle("Login", displayMode: .large)
+                .popup(isPresented: $authVM.isError) {
+                    HStack {
+                        Spacer()
+                        Image("ic_warn")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .padding(.trailing, 5)
+                        Text("Please check with your credentials!")
+                            .font(.system(size: 18, weight: .regular))
+                        Spacer()
+                    }
+                    .padding(.vertical, 10)
+                    .background(Color("WarnYellow"))
+                    .cornerRadius(15)
+                    .padding(.horizontal, 25)
+                } customize: {
+                    $0
+                        .type(.floater())
+                        .position(.bottom)
+                        .animation(.spring())
+                        .closeOnTapOutside(true)
+                        .backgroundColor(.black.opacity(0.5))
+                        .autohideIn(2)
+                }
             } else {
                 VStack(spacing: 25, content: {
                     EGTextField(text: $authVM.regUsername)
@@ -70,18 +102,23 @@ struct AuthenticationView: View {
                         .setTextFieldHeight(55)
                     Text("By signing up, you agree to our [Terms & Conditions](https://apple.com) and [Privacy Policy.](https://apple.com)")
                         .frame(maxWidth: .infinity)
-                    Button(action: {
-                        authVM.createUser()
-                    }, label: {
-                        Spacer()
-                        Text("Sign Up")
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(Color.white)
-                        Spacer()
-                    })
-                    .padding(.all)
-                    .background(Color("ThemeColor"))
-                    .cornerRadius(10)
+                    if !authVM.isLoading {
+                        Button(action: {
+                            authVM.createUser()
+                        }, label: {
+                            Spacer()
+                            Text("Sign Up")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Color.white)
+                            Spacer()
+                        })
+                        .padding(.all)
+                        .background(Color("ThemeColor"))
+                        .cornerRadius(10)
+                    } else {
+                        ProgressView()
+                            .padding(.all)
+                    }
                     HStack(spacing: 5){
                         Spacer()
                         Text("Already have an account?")
@@ -105,25 +142,33 @@ struct AuthenticationView: View {
                 .padding(.horizontal, 20)
                 .navigationBarTitle("Sign Up", displayMode: .large)
                 .popup(isPresented: $authVM.isSuccess) {
-                    VStack {
+                    HStack {
+                        Spacer()
                         Image("ic_success")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 100, height: 100)
+                            .frame(width: 40, height: 40)
+                            .padding(.trailing, 5)
                         Text("You are set!")
-                            .font(.title2)
+                            .font(.system(size: 18, weight: .regular))
+                        Spacer()
                     }
                     .padding(.vertical, 10)
-                    .padding(.horizontal, 30)
-                    .background(.white)
+                    .background(Color("#33BBC5"))
                     .cornerRadius(15)
+                    .padding(.horizontal, 25)
                 } customize: {
                     $0
-                        .position(.center)
+                        .type(.floater())
+                        .position(.bottom)
                         .animation(.spring())
+                        .closeOnTapOutside(true)
                         .backgroundColor(.black.opacity(0.5))
                         .autohideIn(2)
                         .dismissCallback {
+                            withAnimation{
+                                authVM.isToggledLog.toggle()
+                            }
                         }
                 }
                 .popup(isPresented: $authVM.isError) {
@@ -150,10 +195,9 @@ struct AuthenticationView: View {
                         .closeOnTapOutside(true)
                         .backgroundColor(.black.opacity(0.5))
                         .autohideIn(2)
-                        .dismissCallback {
-                        }
                 }
             }
+            NavigationLink(destination: isPinSet ? AnyView(MainTabView()) : AnyView(LockScreenView(isSetPassword: true)), isActive: $authVM.jumpToMain) {}
         }
     }
 }

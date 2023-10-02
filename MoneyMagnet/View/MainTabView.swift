@@ -11,8 +11,13 @@ import PopupView
 struct MainTabView: View {
     @ObservedObject var homeVM = HomeViewModel()
     @ObservedObject var transferVM = TransfersViewModel()
+    @ObservedObject var profileVM = ProfileViewModel()
     @State var selectedTab = "ic_home"
     @State var selectedImage = ""
+    
+    init() {
+        
+    }
     
     var body: some View {
         NavigationStack{
@@ -20,6 +25,7 @@ struct MainTabView: View {
                 switch selectedTab {
                 case "ic_user":
                     ProfileView()
+                        .environmentObject(profileVM)
                         .ignoresSafeArea(.container, edges: .bottom)
                         .statusBar(hidden: false)
                 case "ic_wallet":
@@ -40,7 +46,8 @@ struct MainTabView: View {
             })
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .popup(isPresented: self.$transferVM.showFilterTime) {
-                TransitionFilterView(filter: self.$transferVM.filterTime, showFilterTime: self.$transferVM.showFilterTime, filterTypes: self.transferVM.filterTypes)
+                TransitionFilterView(filter: $transferVM.filterTime)
+                    .environmentObject(transferVM)
                 .frame(minHeight: 150)
                 .background(.white)
             } customize: {
@@ -93,7 +100,42 @@ struct MainTabView: View {
                     .closeOnTapOutside(true)
                     .backgroundColor(.black.opacity(0.5))
             }
+            .popup(isPresented: self.$transferVM.showFilterType) {
+                TransitionTypesView()
+                    .environmentObject(transferVM)
+            } customize: {
+                $0
+                    .type(.default)
+                    .position(.bottom)
+                    .animation(.spring())
+                    .closeOnTapOutside(true)
+                    .backgroundColor(.black.opacity(0.5))
+            }
+            .popup(isPresented: self.$profileVM.showLogout) {
+                LogoutPopup()
+                    .environmentObject(profileVM)
+            } customize: {
+                $0
+                    .type(.default)
+                    .position(.bottom)
+                    .animation(.spring())
+                    .closeOnTapOutside(true)
+                    .backgroundColor(.black.opacity(0.5))
+            }
+            .popup(isPresented: self.$homeVM.showWalletFilter) {
+                WalletFilterView()
+                    .environmentObject(homeVM)
+            } customize: {
+                $0
+                    .type(.default)
+                    .position(.bottom)
+                    .animation(.spring())
+                    .closeOnTapOutside(true)
+                    .backgroundColor(.black.opacity(0.5))
+            }
         }
+        .navigationBarBackButtonHidden()
+        .navigationBarTitle("", displayMode: .inline)
     }
 }
 
@@ -115,7 +157,7 @@ struct CustomTabBar: View {
             TabBarButton(image: "ic_user", selectedTab: $selectedTab, selectedImage: $selectedImage, tabPoints: $tabPoints)
         }
         .padding()
-        .background(.gray.opacity(0.4))
+        .background(Color("ShadeRed"))
         .cornerRadius(20)
         .padding(.horizontal)
     }

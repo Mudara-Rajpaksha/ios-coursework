@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import PopupView
 
 struct LockScreenView: View {
     @Binding var isSetPassword: Bool
@@ -38,8 +39,37 @@ struct LockScreenView: View {
             }
             .padding(.vertical, 20)
             .background(Color("ThemeColor"))
+            .popup(isPresented: self.$appLockVM.isSuccess) {
+                HStack {
+                    Spacer()
+                    Image("ic_success")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .padding(.trailing, 5)
+                    Text("All Set")
+                        .font(.system(size: 18, weight: .regular))
+                    Spacer()
+                }
+                .padding(.vertical, 10)
+                .background(Color("#33BBC5"))
+                .cornerRadius(15)
+                .padding(.horizontal, 25)
+            } customize: {
+                $0
+                .type(.default)
+                .position(.bottom)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.5))
+                .autohideIn(2)
+                .dismissCallback {
+                    self.appLockVM.jumpToMain = true
+                }
+            }
             NavigationLink(destination: MainTabView().navigationBarBackButtonHidden(true), isActive: $appLockVM.jumpToMain) {}
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

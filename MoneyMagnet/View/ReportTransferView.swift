@@ -9,13 +9,14 @@ import SwiftUI
 import PopupView
 
 struct ReportTransferView: View {
-    @State var desc: String = ""
-    @State var amount: String = ""
-    @State var showCategories: Bool = false
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var reportType: Bool
-    @ObservedObject var reportCatrgoryVM = ReportCategoryViewModel()
-    @State var isPickerPresented: Bool = false
-    @State private var selectedImage: UIImage? = nil
+    @ObservedObject var reportVM: ReportTransferViewModel
+    
+    init(reportType: Binding<Bool>) {
+        self._reportType = reportType
+        self.reportVM = ReportTransferViewModel(reportType: reportType.wrappedValue)
+    }
     
     var body: some View {
         VStack(alignment: .leading){
@@ -28,7 +29,7 @@ struct ReportTransferView: View {
                     Text("$")
                         .font(.system(size: 60, weight: .bold))
                         .foregroundColor(.white)
-                    TextField("00", text: $amount)
+                    TextField("00", text: $reportVM.transAmount)
                         .font(.system(size: 60, weight: .bold))
                         .foregroundColor(.white)
                         .keyboardType(.numberPad)
@@ -38,7 +39,7 @@ struct ReportTransferView: View {
             Spacer()
             VStack(alignment: .leading, spacing: 15){
                 HStack{
-                    Text(reportType ? reportCatrgoryVM.expenseCategories[reportCatrgoryVM.selectedIndex] : reportCatrgoryVM.incomeCategories[reportCatrgoryVM.selectedIndex])
+                    Text(reportType ? reportVM.expenseCategories[reportVM.selectedCategory] : reportVM.incomeCategories[reportVM.selectedCategory])
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
@@ -50,10 +51,10 @@ struct ReportTransferView: View {
                 )
                 .background(.white)
                 .onTapGesture {
-                    self.showCategories.toggle()
+                    self.reportVM.showCategories.toggle()
                 }
                 HStack{
-                    TextField("Description", text: $desc)
+                    TextField("Description", text: $reportVM.transDesc)
                     Spacer()
                 }
                 .padding(.vertical)
@@ -62,15 +63,15 @@ struct ReportTransferView: View {
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(.gray, lineWidth: 1)
                 )
-                if selectedImage != nil {
-                    Image(uiImage: selectedImage!)
+                if reportVM.selectedImage != nil {
+                    Image(uiImage: reportVM.selectedImage!)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 120, height: 120)
                         .cornerRadius(10)
                         .overlay(
                             Button(action: {
-                                selectedImage = nil
+                                reportVM.selectedImage = nil
                             }) {
                                 Image(systemName: "xmark.circle.fill")
                                     .foregroundColor(.white)
@@ -83,7 +84,7 @@ struct ReportTransferView: View {
                             .offset(x: 10, y: -10), alignment: .topTrailing)
                 } else {
                     Button(action: {
-                        self.isPickerPresented.toggle()
+                        self.reportVM.isPickerPresented.toggle()
                     }, label: {
                         HStack{
                             Spacer()
@@ -101,17 +102,35 @@ struct ReportTransferView: View {
                         )
                     })
                 }
-                Button(action: {
-                }, label: {
-                    Spacer()
-                    Text("Submit")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(Color.white)
-                    Spacer()
-                })
-                .padding(.all)
-                .background(reportType ? .red : .green)
-                .cornerRadius(10)
+                if (reportVM.isLoading) {
+                    HStack{
+                        Spacer()
+                        ProgressView()
+                            .padding(.all)
+                        Spacer()
+                    }
+                } else {
+                    Button(action: {
+                        if reportVM.validateReport() {
+                            if reportVM.selectedImage != nil{
+                                reportVM.uploadToStorage(selectedImage: reportVM.selectedImage!)
+                            } else {
+                                reportVM.reportTransfer()
+                            }
+                        } else {
+                            reportVM.isError.toggle()
+                        }
+                    }, label: {
+                        Spacer()
+                        Text("Submit")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Color.white)
+                        Spacer()
+                    })
+                    .padding(.all)
+                    .background(reportType ? .red : .green)
+                    .cornerRadius(10)
+                }
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 50)
@@ -121,16 +140,70 @@ struct ReportTransferView: View {
         }
         .background(reportType ? .red : .green)
         .navigationTitle(reportType ? "Expence" : "Income")
-        .sheet(isPresented: $isPickerPresented) {
-            ImagePickerUtils(selectedImage: $selectedImage)
+        .sheet(isPresented: $reportVM.isPickerPresented) {
+            ImagePickerUtils(selectedImage: $reportVM.selectedImage)
+        }
+        .popup(isPresented: $reportVM.isError) {
+            HStack {
+                Spacer()
+                Image("ic_warn")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .padding(.trailing, 5)
+                Text("Amount / Description Cannot Be Empty!")
+                    .font(.system(size: 18, weight: .regular))
+                Spacer()
+            }
+            .padding(.vertical, 10)
+            .background(Color("WarnYellow"))
+            .cornerRadius(15)
+            .padding(.horizontal, 25)
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.bottom)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.5))
+                .autohideIn(2)
+        }
+        .popup(isPresented: $reportVM.isSuccess) {
+            HStack {
+                Spacer()
+                Image("ic_success")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .padding(.trailing, 5)
+                Text("Successfully Reported")
+                    .font(.system(size: 18, weight: .regular))
+                Spacer()
+            }
+            .padding(.vertical, 10)
+            .background(Color("#33BBC5"))
+            .cornerRadius(15)
+            .padding(.horizontal, 25)
+        } customize: {
+            $0
+            .type(.floater())
+            .position(.bottom)
+            .animation(.spring())
+            .closeOnTapOutside(true)
+            .backgroundColor(.black.opacity(0.5))
+            .autohideIn(2)
+            .dismissCallback({
+                self.presentationMode.wrappedValue.dismiss()
+            })
         }
         NavigationLink(destination:
                         ReportCategoryView(reportType: $reportType)
-                            .environmentObject(reportCatrgoryVM)
-                            .navigationBarTitle(reportType ? "Expense Categories" : "Income Categories", displayMode: .inline), isActive: $showCategories) {}
+                            .environmentObject(reportVM)
+                            .navigationBarTitle(reportType ? "Expense Categories" : "Income Categories", displayMode: .inline), isActive: $reportVM.showCategories) {}
     }
 }
 
 #Preview {
-    ReportTransferView(desc: "", reportType: .constant(true))
+    ReportTransferView(reportType: .constant(true))
 }
+

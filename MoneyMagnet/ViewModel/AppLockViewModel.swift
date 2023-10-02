@@ -15,6 +15,7 @@ class AppLockViewModel: ObservableObject {
     @Published var enteredPIN = ""
     @Published var pinTitle = ""
     @Published var error: Bool = false
+    @Published var isSuccess: Bool = false
     @Published var jumpToMain = false
     
     init(isSetPassword: Bool) {
@@ -33,7 +34,8 @@ class AppLockViewModel: ObservableObject {
                 self.retryPin = true
             } else {
                 if enteredPIN == setupPIN {
-                    self.jumpToMain = true
+                    UserDefaultsManager.shared.setString(setupPIN, forKey: UserDefaultsManager.ACCESS_PIN)
+                    self.isSuccess = true
                 } else {
                     self.error.toggle()
                     self.retryPin = false
@@ -47,7 +49,7 @@ class AppLockViewModel: ObservableObject {
                 }
             }
         } else {
-            if enteredPIN == "1234" {
+            if enteredPIN == UserDefaultsManager.shared.getString(forKey: UserDefaultsManager.ACCESS_PIN) as! String {
                 withAnimation{
                     self.jumpToMain = true
                 }
@@ -63,3 +65,4 @@ class AppLockViewModel: ObservableObject {
         }
     }
 }
+

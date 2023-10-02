@@ -10,17 +10,17 @@ import SwiftUI
 struct ReportCategoryView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var reportType: Bool
-    @EnvironmentObject var reportCatrgoryVM: ReportCategoryViewModel
+    @EnvironmentObject var reportVM: ReportTransferViewModel
     
     var body: some View {
         VStack{
             if reportType {
-                ForEach(0..<reportCatrgoryVM.expenseCategories.count, id: \.self){ index in
+                ForEach(0..<reportVM.expenseCategories.count, id: \.self){ index in
                     HStack{
-                        Text(reportCatrgoryVM.expenseCategories[index])
+                        Text(reportVM.expenseCategories[index])
                             .padding(.vertical, 10)
                         Spacer()
-                        if reportCatrgoryVM.selectedIndex == index {
+                        if reportVM.selectedCategory == index {
                             Image("ic_selected")
                                 .resizable()
                                 .frame(width: 30, height: 30)
@@ -28,18 +28,18 @@ struct ReportCategoryView: View {
                     }
                     .background(.white)
                     .onTapGesture {
-                        reportCatrgoryVM.selectedIndex = index
+                        reportVM.selectedCategory = index
                         presentationMode.wrappedValue.dismiss()
                     }
                     Divider()
                 }
             } else {
-                ForEach(0..<reportCatrgoryVM.incomeCategories.count, id: \.self){ index in
+                ForEach(0..<reportVM.incomeCategories.count, id: \.self){ index in
                     HStack{
-                        Text(reportCatrgoryVM.incomeCategories[index])
+                        Text(reportVM.incomeCategories[index])
                             .padding(.vertical, 10)
                         Spacer()
-                        if reportCatrgoryVM.selectedIndex == index {
+                        if reportVM.selectedCategory == index {
                             Image("ic_selected")
                                 .resizable()
                                 .frame(width: 30, height: 30)
@@ -47,7 +47,7 @@ struct ReportCategoryView: View {
                     }
                     .background(.white)
                     .onTapGesture {
-                        reportCatrgoryVM.selectedIndex = index
+                        reportVM.selectedCategory = index
                         presentationMode.wrappedValue.dismiss()
                     }
                     Divider()

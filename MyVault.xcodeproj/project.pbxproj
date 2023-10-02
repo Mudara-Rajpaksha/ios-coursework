@@ -25,12 +25,19 @@
 		30AB07CF2AC77A6600B5CA84 /* ReportCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB07CE2AC77A6600B5CA84 /* ReportCategoryView.swift */; };
 		30AB07D12AC77ABC00B5CA84 /* TransfersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB07D02AC77ABC00B5CA84 /* TransfersViewModel.swift */; };
 		30AB07D32AC77AE500B5CA84 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB07D22AC77AE500B5CA84 /* HomeViewModel.swift */; };
-		30AB07D52AC77AF600B5CA84 /* ReportCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB07D42AC77AF600B5CA84 /* ReportCategoryViewModel.swift */; };
 		30C30C5E2AC7D85E0008EA28 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 30C30C5D2AC7D85E0008EA28 /* FirebaseAuth */; };
 		30C30C602AC7D8710008EA28 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 30C30C5F2AC7D8710008EA28 /* FirebaseStorage */; };
+		30C30C9E2ACB3BD70008EA28 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30C9D2ACB3BD70008EA28 /* CommonUtils.swift */; };
+		30C30CA22ACB3C930008EA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C30CA12ACB3C930008EA28 /* Assets.xcassets */; };
+		30C30CA42ACB3D750008EA28 /* LoginUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30CA32ACB3D750008EA28 /* LoginUserModel.swift */; };
+		30C30CA62ACB3D830008EA28 /* WalletDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30CA52ACB3D830008EA28 /* WalletDetailsModel.swift */; };
+		30C30CA82ACB3D8F0008EA28 /* TransactionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30CA72ACB3D8F0008EA28 /* TransactionListModel.swift */; };
+		30C30CAA2ACB3D9B0008EA28 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30CA92ACB3D9B0008EA28 /* TransactionModel.swift */; };
+		30C30CAC2ACB3EE00008EA28 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30CAB2ACB3EE00008EA28 /* ProfileViewModel.swift */; };
+		30C30CAE2ACB3EEE0008EA28 /* TransDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30CAD2ACB3EEE0008EA28 /* TransDetailsViewModel.swift */; };
+		30C30CB12ACB3F650008EA28 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 30C30CB02ACB3F650008EA28 /* MarqueeText */; };
 		8D56ADA22ABF13E200F69464 /* MoneyMagnetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D56ADA12ABF13E200F69464 /* MoneyMagnetApp.swift */; };
 		8D56ADA42ABF13E200F69464 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D56ADA32ABF13E200F69464 /* OnboardingView.swift */; };
-		8D56ADA62ABF13E500F69464 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D56ADA52ABF13E500F69464 /* Assets.xcassets */; };
 		8D56ADA92ABF13E500F69464 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D56ADA82ABF13E500F69464 /* Preview Assets.xcassets */; };
 		8D56ADB02ABF222000F69464 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D56ADAF2ABF222000F69464 /* Launch Screen.storyboard */; };
 		8D56ADBA2ABF3FAF00F69464 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D56ADB92ABF3FAF00F69464 /* OnboardingModel.swift */; };
@@ -61,11 +68,17 @@
 		30AB07CE2AC77A6600B5CA84 /* ReportCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCategoryView.swift; sourceTree = "<group>"; };
 		30AB07D02AC77ABC00B5CA84 /* TransfersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransfersViewModel.swift; sourceTree = "<group>"; };
 		30AB07D22AC77AE500B5CA84 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		30AB07D42AC77AF600B5CA84 /* ReportCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCategoryViewModel.swift; sourceTree = "<group>"; };
+		30C30C9D2ACB3BD70008EA28 /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		30C30CA12ACB3C930008EA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		30C30CA32ACB3D750008EA28 /* LoginUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserModel.swift; sourceTree = "<group>"; };
+		30C30CA52ACB3D830008EA28 /* WalletDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailsModel.swift; sourceTree = "<group>"; };
+		30C30CA72ACB3D8F0008EA28 /* TransactionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListModel.swift; sourceTree = "<group>"; };
+		30C30CA92ACB3D9B0008EA28 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
+		30C30CAB2ACB3EE00008EA28 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		30C30CAD2ACB3EEE0008EA28 /* TransDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransDetailsViewModel.swift; sourceTree = "<group>"; };
 		8D56AD9E2ABF13E200F69464 /* MoneyMagnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyMagnet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D56ADA12ABF13E200F69464 /* MoneyMagnetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyMagnetApp.swift; sourceTree = "<group>"; };
 		8D56ADA32ABF13E200F69464 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		8D56ADA52ABF13E500F69464 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D56ADA82ABF13E500F69464 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8D56ADAF2ABF222000F69464 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8D56ADB92ABF3FAF00F69464 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
@@ -95,6 +108,7 @@
 				8DED62702AC12FA80047F296 /* PopupView in Frameworks */,
 				8DED625F2ABFFED50047F296 /* CustomTextField in Frameworks */,
 				304A170A2AC7D52800D8B2F9 /* FirebaseAnalyticsSwift in Frameworks */,
+				30C30CB12ACB3F650008EA28 /* MarqueeText in Frameworks */,
 				304A17062AC7D52800D8B2F9 /* FirebaseAnalytics in Frameworks */,
 				30C30C5E2AC7D85E0008EA28 /* FirebaseAuth in Frameworks */,
 				30C30C602AC7D8710008EA28 /* FirebaseStorage in Frameworks */,
@@ -159,6 +173,10 @@
 			children = (
 				8D56ADB92ABF3FAF00F69464 /* OnboardingModel.swift */,
 				8DED62712AC137070047F296 /* UserModel.swift */,
+				30C30CA32ACB3D750008EA28 /* LoginUserModel.swift */,
+				30C30CA52ACB3D830008EA28 /* WalletDetailsModel.swift */,
+				30C30CA72ACB3D8F0008EA28 /* TransactionListModel.swift */,
+				30C30CA92ACB3D9B0008EA28 /* TransactionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,8 +189,9 @@
 				8DED62642AC0A02D0047F296 /* AppLockViewModel.swift */,
 				30AB07D02AC77ABC00B5CA84 /* TransfersViewModel.swift */,
 				30AB07D22AC77AE500B5CA84 /* HomeViewModel.swift */,
-				30AB07D42AC77AF600B5CA84 /* ReportCategoryViewModel.swift */,
 				304A17002AC7D4E100D8B2F9 /* ReportTransferViewModel.swift */,
+				30C30CAB2ACB3EE00008EA28 /* ProfileViewModel.swift */,
+				30C30CAD2ACB3EEE0008EA28 /* TransDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -198,8 +217,8 @@
 		8D56ADB42ABF294800F69464 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				30C30CA12ACB3C930008EA28 /* Assets.xcassets */,
 				304A17022AC7D50300D8B2F9 /* GoogleService-Info.plist */,
-				8D56ADA52ABF13E500F69464 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -212,6 +231,7 @@
 				8D7AB9312AC20B2000A48A6D /* CurvedShape.swift */,
 				30AB07C22AC7788200B5CA84 /* ImagePickerUtils.swift */,
 				304A16FE2AC7D4C300D8B2F9 /* ImageUploadUtils.swift */,
+				30C30C9D2ACB3BD70008EA28 /* CommonUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -246,6 +266,7 @@
 				307651172AC7D6E600C2F8B6 /* Kingfisher */,
 				30C30C5D2AC7D85E0008EA28 /* FirebaseAuth */,
 				30C30C5F2AC7D8710008EA28 /* FirebaseStorage */,
+				30C30CB02ACB3F650008EA28 /* MarqueeText */,
 			);
 			productName = MoneyMagnet;
 			productReference = 8D56AD9E2ABF13E200F69464 /* MoneyMagnet.app */;
@@ -266,7 +287,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8D56AD992ABF13E200F69464 /* Build configuration list for PBXProject "MoneyMagnet" */;
+			buildConfigurationList = 8D56AD992ABF13E200F69464 /* Build configuration list for PBXProject "MyVault" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -281,6 +302,7 @@
 				30AB07C42AC778B600B5CA84 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				30AB07C72AC7790200B5CA84 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 				304A17042AC7D52800D8B2F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				30C30CAF2ACB3F650008EA28 /* XCRemoteSwiftPackageReference "MarqueeText" */,
 			);
 			productRefGroup = 8D56AD9F2ABF13E200F69464 /* Products */;
 			projectDirPath = "";
@@ -298,8 +320,8 @@
 			files = (
 				8D56ADB02ABF222000F69464 /* Launch Screen.storyboard in Resources */,
 				304A17032AC7D50300D8B2F9 /* GoogleService-Info.plist in Resources */,
+				30C30CA22ACB3C930008EA28 /* Assets.xcassets in Resources */,
 				8D56ADA92ABF13E500F69464 /* Preview Assets.xcassets in Resources */,
-				8D56ADA62ABF13E500F69464 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,26 +332,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30C30CAA2ACB3D9B0008EA28 /* TransactionModel.swift in Sources */,
+				30C30CA42ACB3D750008EA28 /* LoginUserModel.swift in Sources */,
+				30C30C9E2ACB3BD70008EA28 /* CommonUtils.swift in Sources */,
 				8DED62612AC09A910047F296 /* AuthenticationViewModel.swift in Sources */,
 				30AB07D32AC77AE500B5CA84 /* HomeViewModel.swift in Sources */,
+				30C30CAE2ACB3EEE0008EA28 /* TransDetailsViewModel.swift in Sources */,
 				8DED62632AC09F860047F296 /* AppLockView.swift in Sources */,
 				30AB07CD2AC77A4000B5CA84 /* ReportTransferView.swift in Sources */,
 				8D7AB92C2AC1F21500A48A6D /* HomeView.swift in Sources */,
 				30AB07D12AC77ABC00B5CA84 /* TransfersViewModel.swift in Sources */,
 				30AB07CF2AC77A6600B5CA84 /* ReportCategoryView.swift in Sources */,
-				30AB07D52AC77AF600B5CA84 /* ReportCategoryViewModel.swift in Sources */,
 				8DED626B2AC0CCB70047F296 /* UserDefaultsManager.swift in Sources */,
 				8DED62692AC0C7100047F296 /* MainTabView.swift in Sources */,
 				304A16FF2AC7D4C300D8B2F9 /* ImageUploadUtils.swift in Sources */,
+				30C30CA82ACB3D8F0008EA28 /* TransactionListModel.swift in Sources */,
 				8D56ADA42ABF13E200F69464 /* OnboardingView.swift in Sources */,
 				30AB07CB2AC77A2200B5CA84 /* TransferDetailsView.swift in Sources */,
 				8D7AB9322AC20B2000A48A6D /* CurvedShape.swift in Sources */,
 				304A17012AC7D4E100D8B2F9 /* ReportTransferViewModel.swift in Sources */,
 				8D56ADBE2ABF77CF00F69464 /* AuthenticationView.swift in Sources */,
 				8D7AB9302AC1F23500A48A6D /* ProfileView.swift in Sources */,
+				30C30CA62ACB3D830008EA28 /* WalletDetailsModel.swift in Sources */,
 				8DED626D2AC0D8070047F296 /* NetworkUtils.swift in Sources */,
 				8D56ADA22ABF13E200F69464 /* MoneyMagnetApp.swift in Sources */,
 				8D56ADBA2ABF3FAF00F69464 /* OnboardingModel.swift in Sources */,
+				30C30CAC2ACB3EE00008EA28 /* ProfileViewModel.swift in Sources */,
 				8D56ADBC2ABF3FE300F69464 /* OnboardingViewModel.swift in Sources */,
 				30AB07C32AC7788200B5CA84 /* ImagePickerUtils.swift in Sources */,
 				8DED62722AC137070047F296 /* UserModel.swift in Sources */,
@@ -524,7 +552,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8D56AD992ABF13E200F69464 /* Build configuration list for PBXProject "MoneyMagnet" */ = {
+		8D56AD992ABF13E200F69464 /* Build configuration list for PBXProject "MyVault" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8D56ADAA2ABF13E500F69464 /* Debug */,
@@ -567,6 +595,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.2.2;
+			};
+		};
+		30C30CAF2ACB3F650008EA28 /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joekndy/MarqueeText.git";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		8DED625D2ABFFED50047F296 /* XCRemoteSwiftPackageReference "SwiftUI-Custom-TextField" */ = {
@@ -642,6 +678,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 304A17042AC7D52800D8B2F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		30C30CB02ACB3F650008EA28 /* MarqueeText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30C30CAF2ACB3F650008EA28 /* XCRemoteSwiftPackageReference "MarqueeText" */;
+			productName = MarqueeText;
 		};
 		8DED625E2ABFFED50047F296 /* CustomTextField */ = {
 			isa = XCSwiftPackageProductDependency;
